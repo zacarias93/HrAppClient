@@ -8,15 +8,36 @@
     timecardService.$inject = ['$http'];
     function timecardService($http) {
 
-        var url = 'http://localhost:8080/timecard';
+        var url = 'http://localhost:8080/';
         var cardsByID = {};
 
         var service = {
+            remove: remove,
             create: create,
             findByID: findByID,
+            showAll: showAll,
 
         }
         return service;
+
+        function remove(id) {
+            return $http
+                .get(url + 'remove/' + id)
+                .then(function(response) {
+                    console.log(response);
+                })
+        }
+
+        function showAll() {
+            return $http
+                .get(url + 'timecard')
+                .then(function(response) {
+                    console.log(response);
+                    return response;
+                }, function(response) {
+                    console.log('error w/ finding all timecards');
+                })
+        };
 
         function create(timecard) {
             return $http
@@ -29,8 +50,7 @@
         };
 
         function findByID(id) {
-            return $http    
-                .get
+            
         }
 
     }

@@ -7,11 +7,11 @@
     <input type='text' class="form-control" ng-model="userInput" id="exampleInputID" placeholder="Enter Time Card ID">
   </div>
 
-  <button type="submit" ng-click="showAll()"  class="btn btn-primary">Show TimeCards</button>
-  <button type="submit" ng-click="remove(userInput)" class="btn btn-primary">Remove</button>
+  <button type="submit" ng-click="vm.showAll()"  class="btn btn-primary">Show All TimeCards</button>
+  <button type="submit" ng-click="vm.remove(userInput)" class="btn btn-primary">Remove</button>
   <button type="submit" ng-click="findByID(userInput)" class="btn btn-primary" style>Find by ID</button>
 
-  	<pre class="timecards" ng-repeat="timecard in timeCards" ng-cloak>
+  	<pre class="timecards" ng-repeat="timecard in vm.timecards" >
   		<p>ID: {{timecard.id}}</p>
   		<p>Employee ID: {{timecard.employeeID}}</p>
   		<p>Time In: {{timecard.timeIn}}</p>

@@ -19,7 +19,7 @@ angular
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'TimeCardCtrl',
-        controllerAs: 'timecardVM'
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'

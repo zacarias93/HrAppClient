@@ -5,53 +5,31 @@ angular
 	.module('hrApp')
 	.controller('TimeCardCtrl', function (timecardService, $scope, $http) {
 
-		$scope.timecard = {
+		var vm = this;
+		var url = 'http://localhost:8080/timecard';
+
+		vm.timecards = [];		
+		vm.timecard = {
 			"employeeID": '',
 			"timeIn": '',
 			"timeOut": ''
 		};
 
-		var url = 'http://localhost:8080/timecard';
-
-		$scope.timeCards = '';
-		$scope.userInput = '';
-
-
-		// $scope.$watch('timeCards', function(timeCards) {
-		// 	if(angular.isDefined(timeCards.then)){
-		// 		timeCards.then(function(response){
-		// 			console.log(response);
-		// 			$scope.timeCards = response.data;
-		// 		}, function(error){
-		// 		});
-		// 	}
-		// });
-
-		$scope.showAll = function () {
-
-			$http({
-				method: 'GET',
-				url: url
-			}).
-				then(function (response) {
-					$scope.timeCards = response.data;
-					console.log($scope.timeCards);
-				});
+		vm.showAll = function () {
+			timecardService
+				.showAll()
+				.then(function(response) {
+					vm.timecards = response.data;
+					console.log(vm.timecards);
+				})
 		}
 
-		$scope.save = function (timecard) {
-			console.log(timecard);
-			timecardService.create(timecard);
-		}
-
-
-		$scope.remove = function (userInput) {
-			console.log(userInput);
-			var url1 = 'http://localhost:8080/remove/' + userInput;
-			$http.get(url1)
-				.then(function (response) {
-					$scope.timeCards = response.data;
-				});
+		vm.remove = function (id) {
+			timecardService
+				.remove(id)
+				.then(function(response) {
+					console.log(response);
+				})
 		}
 
 		$scope.findByID = function (userInput) {
