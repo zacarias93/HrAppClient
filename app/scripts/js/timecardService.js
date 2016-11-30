@@ -12,6 +12,7 @@
         var cardsByID = {};
 
         var service = {
+            add: add,
             remove: remove,
             create: create,
             findByID: findByID,
@@ -19,6 +20,17 @@
 
         }
         return service;
+
+        function add(timecard) {
+            return $http
+                .post(url + '/timecard', timecard)
+                .then(function(response) {
+                    console.log(response);
+                    return response;
+                }, function (response) {
+                    console.log('error w/ adding timecard');
+                })
+        }
 
         function remove(id) {
             return $http
@@ -50,8 +62,15 @@
         };
 
         function findByID(id) {
-            
-        }
+            return $http
+                .get(url + 'timecard/' + id)
+                .then(function(response) {
+                    console.log(response);
+                    return response;
+                }, function(response) {
+                    console.log('error w/ finding employees timecards');
+                })
+        };
 
     }
 })();

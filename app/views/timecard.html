@@ -6,17 +6,15 @@
 <form>
   <div class="form-group">
     <label for="exampleInputID1">Employee ID</label>
-    <input type='text' class="form-control" ng-model="timecard.employeeID" id="exampleInputID" aria-describedby="emailHelp" placeholder="Enter employee ID">
+    <input type='text' class="form-control" ng-model="vm.employeeID" id="exampleInputID" aria-describedby="emailHelp" placeholder="Enter employee ID">
 
   </div>
-
-  
 
   <div class="form-group">
     <label for="timeIn">Time In</label>
 
     <div class='input-group date' id='datetimepicker1'>
-        <input type='text' class="form-control" ng-model="timecard.timeIn" id="timeIn"/>
+        <input type='text' class="form-control" ng-model="vm.timeIn" id="timeIn"/>
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
@@ -27,13 +25,17 @@
     <label for="timeOut">Time Out</label>
 
     <div class='input-group date' id='datetimepicker2'>
-        <input type='text' class="form-control" ng-model="timecard.timeOut" id="timeOut"/>
+        <input type='text' class="form-control" ng-model="vm.timeOut" id="timeOut"/>
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
     </div>
   </div>
-  <button type="submit" ng-click="save(timecard)" class="btn btn-primary">Submit</button>
+  <button type="submit" ng-click="vm.addTimecard()" class="btn btn-primary">Submit</button>
+
+  <div style="text-align:center">
+    <h2> {{vm.message}} </h2>
+  </div>
   
 
 </form>

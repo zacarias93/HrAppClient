@@ -1,43 +1,54 @@
-'use strict';
+(function () {
+    'use strict';
 
+    angular
+        .module('hrApp')
+        .controller('TimecardCtrl', TimecardCtrl);
 
-angular
-	.module('hrApp')
-	.controller('TimeCardCtrl', function (timecardService, $scope, $http) {
+    TimecardCtrl.$inject = ['timecardService', '$http'];
+    function TimecardCtrl(timecardService, $http) {
+        var vm = this;
 
-		var vm = this;
-		var url = 'http://localhost:8080/timecard';
+        vm.employeeID = '';
+        vm.timeIn = '';
+        vm.timeOut = '';
+        vm.addTimecard = addTimecard;
+        vm.message = '';
 
-		vm.timecards = [];		
-		vm.timecard = {
+        var timecard = {
 			"employeeID": '',
 			"timeIn": '',
 			"timeOut": ''
 		};
 
-		vm.showAll = function () {
-			timecardService
-				.showAll()
-				.then(function(response) {
-					vm.timecards = response.data;
-					console.log(vm.timecards);
-				})
-		}
+        function setTimecard() {
+            timecard.employeeID = vm.employeeID;
+            timecard.timeIn = vm.timeIn;
+            timecard.timeOut = vm.timeOut;
+        }
 
-		vm.remove = function (id) {
-			timecardService
-				.remove(id)
-				.then(function(response) {
-					console.log(response);
-				})
-		}
+        function addTimecard() {
+            setTimecard();
+            console.log(timecard);
+            timecardService
+                .add(timecard)
+                .then(function(response) {
+                    console.log(response);
+                    clear();
+                    vm.message = 'Timecard Submitted!';
+                })
+        };
 
-		$scope.findByID = function (userInput) {
-			var url1 = 'http://localhost:8080/find/' + userInput;
-			$http.get(url1)
-				.then(function (response) {
-					$scope.timeCards = response.data;
-				});
-		}
+        function clear() {
+            vm.employeeID = '';
+            vm.timeIn = '';
+            vm.timeOut = '';
+            timecard.employeeID = '';
+            timecard.timeIn = '';
+            timecard.timeOut = '';
+        };
 
-	});
+
+
+    }
+})();

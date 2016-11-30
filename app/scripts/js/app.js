@@ -13,12 +13,12 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/timecard.html',
-        controller: 'TimeCardCtrl',
-        controllerAs: 'timecardVM'
+        controller: 'TimecardCtrl',
+        controllerAs: 'vm'
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
-        controller: 'TimeCardCtrl',
+        controller: 'AdminCtrl',
         controllerAs: 'vm'
       })
       .otherwise({

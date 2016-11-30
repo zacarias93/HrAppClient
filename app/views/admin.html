@@ -4,12 +4,12 @@
 	
   <div class="form-group">
     <label >Time Card ID</label>
-    <input type='text' class="form-control" ng-model="userInput" id="exampleInputID" placeholder="Enter Time Card ID">
+    <input type='text' class="form-control" ng-model="vm.userInput" placeholder="Enter Time Card ID">
   </div>
 
   <button type="submit" ng-click="vm.showAll()"  class="btn btn-primary">Show All TimeCards</button>
-  <button type="submit" ng-click="vm.remove(userInput)" class="btn btn-primary">Remove</button>
-  <button type="submit" ng-click="findByID(userInput)" class="btn btn-primary" style>Find by ID</button>
+  <button type="submit" ng-click="vm.remove(vm.userInput)" class="btn btn-primary">Remove</button>
+  <button type="submit" ng-click="vm.findByID(vm.userInput)" class="btn btn-primary" style>Find by Employee ID</button>
 
   	<pre class="timecards" ng-repeat="timecard in vm.timecards" >
   		<p>ID: {{timecard.id}}</p>
